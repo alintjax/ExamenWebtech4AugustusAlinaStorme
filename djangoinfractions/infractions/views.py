@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from .models import Album
+from .models import Infraction
 import json
 from django.http import JsonResponse
 
