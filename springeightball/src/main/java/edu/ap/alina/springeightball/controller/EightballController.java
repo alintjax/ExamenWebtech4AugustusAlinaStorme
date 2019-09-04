@@ -1,6 +1,9 @@
 package edu.ap.alina.springeightball.controller;
 
 import edu.ap.alina.springeightball.service.RedisService;
+
+import java.text.Normalizer.Form;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -9,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Scope("session")
-public class ProductController {
+public class EightballController {
 
     private RedisService service; // pattern : "products":question:answer
     private String answers[] = {"It is certain.", "It is decidedly so.", "Without a doubt.", "Yes - definitely.", "You may rely on it.", "As I see it, yes.",
@@ -22,7 +25,7 @@ public class ProductController {
         this.service = service;
     }
 
-    public ProductController() { }
+    public EightballController() { }
 
 
     @RequestMapping("/")
@@ -36,7 +39,7 @@ public class ProductController {
     }
 
     @RequestMapping("/listByQuestion")
-    public String listProductsByQuestion(@RequestParam("question") String question,
+    public String searchAnswer(@RequestParam("question") String question,
                                        Model model) {
         String answer = " ";
         if  (service.getKey(question) != null){
@@ -50,9 +53,8 @@ public class ProductController {
             answer = this.answers[(int)Math.floor(rnd)];
             service.setKey(question, answer);
         }
-        model.addAttribute("product", answer);
+        model.addAttribute("question", answer);
 
         return answer;
     }
-
 }

@@ -1,13 +1,13 @@
 package edu.ap.alina.springeightball.model;
 
-public class Product {
+public class AskQuestion {
 
     private String question;
     private String answer;
 
-    public Product() {}
+    public AskQuestion() {}
 
-    public Product(String question, String answer) {
+    public AskQuestion(String question, String answer) {
         this.question = question;
         this.answer = answer;
     }
